@@ -50,8 +50,8 @@ namespace micro_service {
     public:
         LocalStorageMessageListener( LocalStorageService* chatGroupService);
         ~LocalStorageMessageListener();
-        void onEvent(ContactListener::EventArgs& event) override ;
-        void onReceivedMessage(const std::string& humanCode, ContactChannel channelType,
+        void onEvent(ElaphantContact::Listener::EventArgs& event) override ;
+        void onReceivedMessage(const std::string& humanCode, ElaphantContact::Channel channelType,
                                std::shared_ptr<ElaphantContact::Message> msgInfo) override;
     private:
         LocalStorageService*mLocalStorageService;
