@@ -20,7 +20,7 @@ LINK_DIRECTORIES("source/")
 add_library(LocalStorageService  SHARED )
 target_sources(LocalStorageService PRIVATE
         ${SOURCE_FILES})
-TARGET_LINK_LIBRARIES(LocalStorageService pthread sqlite3)
+TARGET_LINK_LIBRARIES(LocalStorageService sqlite3)
 
 pkg_search_module(pkg-Elastos.SDK.Contact REQUIRED Elastos.SDK.Contact)
 message(STATUS "Elastos.SDK.Contact include path: ${pkg-Elastos.SDK.Contact_INCLUDE_DIRS}")
