@@ -13,9 +13,9 @@
 #include <regex>
 #include "DataBase/DatabaseProxy.h"
 #include "Common/FileUtils.hpp"
-#include "PeerNodeSDK/Connector.h"
-#include "PeerNodeSDK/PeerListener.h"
-#include "PeerNodeSDK/PeerNode.h"
+#include "Connector.h"
+#include "PeerListener.h"
+#include "PeerNode.h"
 #include "Elastos.SDK.Contact/Contact.hpp"
 #include "Elastos.SDK.Contact/ContactListener.hpp"
 
