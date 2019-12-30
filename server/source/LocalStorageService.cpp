@@ -20,8 +20,8 @@ namespace micro_service {
     /***********************************************/
     /***** static function implement ***************/
     /***********************************************/
-    LocalStorageService::LocalStorageService(const std::string& path)
-            : mPath(path){
+    LocalStorageService::LocalStorageService(const std::string& path,const std::string& info_path)
+            : mPath(path),mInfoPath(info_path){
         mConnector = new Connector(LocalStorageService_TAG);
         mDatabaseProxy = new DatabaseProxy();
         mDatabaseProxy->startDb(path.c_str());
@@ -43,6 +43,13 @@ namespace micro_service {
         if (user_info.get() != NULL) {
             user_info->getHumanCode(mOwnerHumanCode);
             printf("Service start mOwnerHumanCode:%s\n", mOwnerHumanCode.c_str());
+            std::shared_ptr<Json> user_info_json = std::make_shared<Json>();
+            user_info->toJson(user_info_json);
+            std::string user_info_str = user_info_json->dump();
+            int data_length = user_info_str.length();
+            uint8_t data[data_length];
+            std::copy(std::begin(user_info_str), std::end(user_info_str), data);
+            FileUtils::writeToFile(mInfoPath.c_str(), data, data_length);
         }
         return 0;
     }
@@ -180,8 +187,8 @@ namespace micro_service {
     }
 
     extern "C" {
-    micro_service::LocalStorageService* CreateService(const char* path) {
-        return new micro_service::LocalStorageService(path);
+    micro_service::LocalStorageService* CreateService(const char* path, const char* info_path) {
+        return new micro_service::LocalStorageService(path, info_path);
     }
     void DestroyService(micro_service::LocalStorageService* service) {
         if (service) {

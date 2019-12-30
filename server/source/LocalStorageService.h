@@ -25,7 +25,7 @@ namespace micro_service {
     static const char *LocalStorageService_TAG = "LocalStorageService";
     class LocalStorageService:public std::enable_shared_from_this<LocalStorageService>{
     public:
-        LocalStorageService(const std::string& path);
+        LocalStorageService(const std::string& path,const std::string& info_path);
         ~LocalStorageService();
         int acceptFriend(const std::string& friendid);
         void receiveMessage(const std::string& friend_id, const std::string& message, std::time_t send_time);
@@ -36,7 +36,7 @@ namespace micro_service {
         std::string mOwnerHumanCode;
     protected:
         std::string mPath;
-
+        std::string mInfoPath;
     private:
 
         void getAddressFromFile(std::string& address);
@@ -58,7 +58,7 @@ namespace micro_service {
     };
 
     extern "C" {
-        micro_service::LocalStorageService* CreateService(const char* path);
+        micro_service::LocalStorageService* CreateService(const char* path, const char* info_path);
         void DestroyService(micro_service::LocalStorageService* service);
     }
 }
