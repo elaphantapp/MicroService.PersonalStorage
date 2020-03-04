@@ -77,7 +77,7 @@ namespace micro_service {
             respJson["serviceName"] = LocalStorageService_TAG;
             respJson["type"] = "textMsg";
             respJson["content"] = message;
-            int ret = mConnector->SendMessage(friend_id, respJson.dump());
+            int ret = mConnector->SendMessage(friend_id, ElaphantContact::Channel::Carrier, respJson.dump());
             if (ret != 0) {
                 Log::I(LocalStorageService_TAG,
                        "helpCmd .c_str(): %s errno:(0x%x)",
@@ -101,7 +101,7 @@ namespace micro_service {
             key_value["key"] = key;
             key_value["value"] = value;
             respJson["content"] = key_value;
-            int ret = mConnector->SendMessage(friend_id, respJson.dump());
+            int ret = mConnector->SendMessage(friend_id, ElaphantContact::Channel::Carrier, respJson.dump());
             if (ret != 0) {
                 Log::I(LocalStorageService_TAG,
                        "SetValueCmd key.c_str(): %s, value.c_str(): %s errno:(0x%x)",
@@ -123,7 +123,7 @@ namespace micro_service {
             key_value["key"] = key;
             key_value["value"] = value;
             respJson["content"] = key_value;
-            int ret = mConnector->SendMessage(friend_id, respJson.dump());
+            int ret = mConnector->SendMessage(friend_id, ElaphantContact::Channel::Carrier, respJson.dump());
             if (ret != 0) {
                 Log::I(LocalStorageService_TAG,
                        "GetValueCmd key.c_str(): %s errno:(0x%x)",
